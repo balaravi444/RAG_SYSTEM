@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: rag-system
+    runtime: python
+    plan: standard
+    buildCommand: pip install .
+    startCommand: uvicorn rag_system.api:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: ADMIN_API_KEY
+        sync: false
+      - key: CHROMA_PERSIST_DIR
+        value: /var/data/chroma_db
+      - key: HF_HOME
+        value: /var/data/huggingface
+    disk:
+      name: rag-chroma-data
+      mountPath: /var/data
+      sizeGB: 1
