@@ -196,6 +196,8 @@ This repository includes a `render.yaml` blueprint for a web service with a pers
 
 The Render service and persistent disk use a paid plan. The persistent disk keeps indexed documents across deploys and restarts. If you choose a free, ephemeral deployment instead, documents can be lost when the service restarts or redeploys.
 
+The app is intended for trusted content: `/api/query`, `/api/status`, `/health`, and `/docs` are public, and there is no user authentication. The admin key only protects document ingestion and reset; it does not make stored documents private.
+
 ## 📝 License
 
 MIT
